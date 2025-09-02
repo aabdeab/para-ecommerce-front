@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { Search, ShoppingCart, Menu, X, User } from 'lucide-react';
+import type HeaderProps from '../types/header';
 
-interface HeaderProps {
-  className?: string;
-  cartItems?: number;
-  onCartClick?: () => void;
-  onSearch?: (query: string) => void;
-}
+const categories = [
+  "Skin Care",
+  "Hair Care",
+  "Vitamins",
+  "Baby Care",
+  "Personal Hygiene",
+  "Medical Devices"
+];
 
 const Header: React.FC<HeaderProps> = ({ 
   className = "", 
@@ -23,7 +26,6 @@ const Header: React.FC<HeaderProps> = ({
     { label: "About us", href: "/about" },
     { label: "Contact us", href: "/contact" }
   ];
-
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     onSearch?.(searchQuery);
@@ -51,17 +53,42 @@ const Header: React.FC<HeaderProps> = ({
           {/* Desktop Navigation - Hidden on mobile */}
           <nav className="hidden lg:flex flex-1 justify-center max-w-2xl mx-8">
             <ul className="flex items-center space-x-8">
-              {navigationItems.map((item) => (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 whitespace-nowrap relative group"
-                  >
-                    {item.label}
-                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full"></span>
-                  </a>
-                </li>
-              ))}
+              {navigationItems.map((item) =>
+                item.label === "Collection" ? (
+                  <li key={item.label} className="relative group">
+                    <a
+                      href={item.href}
+                      className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 whitespace-nowrap relative group"
+                    >
+                      {item.label}
+                      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full"></span>
+                    </a>
+                    {/* Dropdown */}
+                    <ul className="absolute left-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity z-50">
+                      {categories.map((cat) => (
+                        <li key={cat}>
+                          <a
+                            href={`/collection?category=${encodeURIComponent(cat)}`}
+                            className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                          >
+                            {cat}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ) : (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 whitespace-nowrap relative group"
+                    >
+                      {item.label}
+                      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full"></span>
+                    </a>
+                  </li>
+                )
+              )}
             </ul>
           </nav>
 
@@ -142,17 +169,36 @@ const Header: React.FC<HeaderProps> = ({
         <div className="lg:hidden bg-white border-t border-gray-200">
           <nav className="container mx-auto px-4 py-4">
             <ul className="space-y-4">
-              {navigationItems.map((item) => (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    className="block text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+              {navigationItems.map((item) =>
+                item.label === "Collection" ? (
+                  <li key={item.label}>
+                    <span className="block text-gray-700 font-medium py-2">Collection</span>
+                    <ul className="pl-4">
+                      {categories.map((cat) => (
+                        <li key={cat}>
+                          <a
+                            href={`/collection?category=${encodeURIComponent(cat)}`}
+                            className="block text-gray-700 hover:text-blue-600 py-1 transition-colors"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            {cat}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ) : (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      className="block text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                )
+              )}
               <li className="sm:hidden pt-2 border-t border-gray-200">
                 <a
                   href="/account"

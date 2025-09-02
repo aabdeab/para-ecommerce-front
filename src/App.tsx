@@ -1,18 +1,21 @@
-import './index.css'
-import Header from "./Components/Header"; 
-import Main from "./Components/Main";
-import Footer from './Components/Footer';
-
+import './index.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Auth from './pages/Auth';
 
 function App() {
   return (
-    <div className="min-h-screen grid grid-rows-[auto_1fr_auto] w-screen">
-      <Header />
-      <Main/>
-      <Footer/>
-     
-    </div>
-  )
+    <Router>
+      <div className="w-screen h-screen ">
+        <main className="container mx-auto ">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Auth/>} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
