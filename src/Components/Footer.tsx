@@ -3,7 +3,7 @@ import React from 'react'
 const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-800 text-white py-8">
-      <div className="container px-6 mx-auto flex flex-col md:flex-row justify-between gap-8 bg-red-500">
+      <div className="container px-6 mx-auto flex flex-col md:flex-row justify-between gap-8">
         {/* Block 1: About */}
         <div className="flex-1">
           <h3 className="font-bold mb-2">About</h3>
