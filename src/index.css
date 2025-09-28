@@ -1,7 +1,17 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "./styles/animations.css";
 
 @plugin "tailwindcss-animate";
 @import "tw-animate-css";
+
+/* Custom utilities */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
 
 @custom-variant dark (&:is(.dark *));
 @config "../tailwind.config.js";
@@ -179,11 +189,32 @@ button:focus-visible {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+
+@tailwind utilities;
+
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  :root {
+    --color-primary: 34 139 230;   /* Blue */
+    --color-accent: 245 101 101;   /* Red */
+    --color-secondary: 154 230 180; /* Green */
   }
+
   body {
-    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    @apply bg-gray-50;
+  }
+}
+
+@layer components {
+  .product-card-hover {
+    @apply transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl;
+  }
+
+  .glass-effect {
+    @apply bg-white/70 backdrop-blur-md border border-white/20;
+  }
+
+  .animated-underline {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full;
   }
 }

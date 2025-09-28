@@ -5,27 +5,32 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-opacity-50 shadow-sm hover:shadow-md [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
+          "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-blue-200 hover:from-blue-700 hover:to-blue-800 focus:ring-blue-300 border-0",
         destructive:
-          "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-red-200 hover:from-red-700 hover:to-red-800 focus:ring-red-300 border-0",
         outline:
-          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "border-2 border-gray-300 bg-white text-gray-700 shadow-gray-100 hover:bg-gray-50 hover:border-gray-400 focus:ring-gray-300",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
+          "bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-gray-200 hover:from-gray-700 hover:to-gray-800 focus:ring-gray-300 border-0",
+        success:
+          "bg-gradient-to-r from-green-600 to-green-700 text-white shadow-green-200 hover:from-green-700 hover:to-green-800 focus:ring-green-300 border-0",
+        warning:
+          "bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-yellow-200 hover:from-yellow-600 hover:to-yellow-700 focus:ring-yellow-300 border-0",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
+          "text-gray-600 hover:text-gray-800 hover:bg-gray-100 focus:ring-gray-300 shadow-none hover:shadow-md",
+        link: "text-blue-600 underline-offset-4 hover:underline hover:text-blue-800 shadow-none",
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-9",
+        default: "h-11 px-6 py-3 text-sm has-[>svg]:px-5",
+        sm: "h-9 px-4 py-2 text-xs has-[>svg]:px-3",
+        lg: "h-13 px-8 py-4 text-base has-[>svg]:px-7",
+        xl: "h-16 px-10 py-5 text-lg has-[>svg]:px-9",
+        icon: "size-11 p-0",
       },
     },
     defaultVariants: {

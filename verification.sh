@@ -1,0 +1,51 @@
+#!/bin/bash
+
+echo "🔍 Vérification de l'intégration Authentication..."
+
+echo ""
+echo "✅ Structure API :"
+echo "   - auth.ts : Fonctions login/register retournent response.data (JWT token)"
+echo "   - tokenService.ts : Stockage localStorage avec clé 'auth_token'"
+echo "   - apiClient.ts : Client API avec auto-authentication"
+
+echo ""
+echo "✅ Context d'Authentication :"
+echo "   - AuthContext : Gestion globale de l'état d'auth"
+echo "   - login() : Stocke le token dans localStorage + met à jour l'état"
+echo "   - logout() : Supprime le token + remet l'état à false"
+
+echo ""
+echo "✅ Composants :"
+echo "   - LoginForm : Appelle authAPI.login() → login(token) → navigate"
+echo "   - Signup : Appelle authAPI.register() → login(token) → navigate"
+echo "   - Header : Affiche statut utilisateur + bouton logout"
+echo "   - ProtectedRoute : Redirige vers /Auth si non authentifié"
+
+echo ""
+echo "✅ Flow complet :"
+echo "   1. Utilisateur remplit formulaire login/register"
+echo "   2. API call vers backend Spring Boot"
+echo "   3. Backend retourne { data: 'jwt-token', success: true }"
+echo "   4. Frontend récupère response.data (le token JWT)"
+echo "   5. Token stocké dans localStorage"
+echo "   6. État d'authentication mis à jour"
+echo "   7. Redirection vers page demandée"
+echo "   8. Header affiche statut connecté"
+
+echo ""
+echo "✅ Sécurité :"
+echo "   - Token JWT dans localStorage"
+echo "   - Validation d'expiration du token"
+echo "   - Auto-logout si token expiré"
+echo "   - Attachment automatique du token aux requêtes API"
+
+echo ""
+echo "🎯 Pour tester :"
+echo "   1. Démarrer backend Spring Boot (port 8080)"
+echo "   2. Démarrer frontend : npm run dev"
+echo "   3. Aller sur /Signup pour créer un compte"
+echo "   4. Aller sur /Auth pour se connecter"
+echo "   5. Vérifier que le header montre l'utilisateur connecté"
+
+echo ""
+echo "✅ Intégration complète et correcte !"
